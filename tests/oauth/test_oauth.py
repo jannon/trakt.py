@@ -98,7 +98,7 @@ def test_request():
         authorization = {
             'access_token': 'mock',
             'token_type': 'bearer',
-            'created_at': calendar.timegm(datetime.datetime.utcnow().utctimetuple()),
+            'created_at': calendar.timegm(datetime.datetime.now(datetime.timezone.utc).utctimetuple()),
             'expires_in': 7 * 24 * 60 * 60,
             'refresh_token': 'mock-refresh_token',
             'scope': 'public'
@@ -149,7 +149,7 @@ def test_refresh_deadlock():
         expired_authorization = {
             'access_token': 'mock-access_token',
             'token_type': 'bearer',
-            'created_at': calendar.timegm(datetime.datetime.utcnow().utctimetuple()),
+            'created_at': calendar.timegm(datetime.datetime.now(datetime.timezone.utc).utctimetuple()),
             'expires_in': 0,
             'refresh_token': 'mock-refresh_token',
             'scope': 'public'

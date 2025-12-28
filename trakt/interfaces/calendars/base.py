@@ -2,7 +2,7 @@ from trakt.core.helpers import dictfilter
 from trakt.interfaces.base import Interface
 from trakt.mapper.summary import SummaryMapper
 
-from datetime import datetime
+from datetime import datetime, timezone
 import requests
 
 
@@ -83,7 +83,7 @@ class CalendarsInterface(Interface):
 
         # Default `start_date` to today when only `days` is provided
         if start_date is None and days:
-            start_date = datetime.utcnow()
+            start_date = datetime.now(timezone.utc)
 
         # Request calendar collection
         response = self.http.get(

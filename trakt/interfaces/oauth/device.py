@@ -3,7 +3,7 @@
 from trakt.core.emitter import Emitter
 from trakt.interfaces.base import Interface
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from threading import Thread
 import calendar
 import logging
@@ -92,7 +92,7 @@ class DeviceOAuthPoller(Interface, Emitter):
         self.interval = interval
 
         # Calculate code expiry date/time
-        self.expires_at = datetime.utcnow() + timedelta(seconds=self.expires_in)
+        self.expires_at = datetime.now(timezone.utc) + timedelta(seconds=self.expires_in)
 
         # Private attributes
         self._abort = False
@@ -105,7 +105,7 @@ class DeviceOAuthPoller(Interface, Emitter):
         return self._active
 
     def has_expired(self):
-        return datetime.utcnow() > self.expires_at
+        return datetime.now(timezone.utc) > self.expires_at
 
     def start(self, daemon=None):
         if self._active or self._thread:
@@ -167,7 +167,7 @@ class DeviceOAuthPoller(Interface, Emitter):
                 data = self.get_data(response)
 
                 if 'created_at' not in data:
-                    data['created_at'] = calendar.timegm(datetime.utcnow().utctimetuple())
+                    data['created_at'] = calendar.timegm(datetime.now(timezone.utc).utctimetuple())
 
                 # Authentication complete
                 self.emit('authenticated', data)
