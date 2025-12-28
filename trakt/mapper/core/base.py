@@ -1,6 +1,6 @@
 
 
-from trakt.objects import User, Movie, Show, Episode, Season, CustomList, Comment, Person, PublicList,\
+from trakt.objects import User, Movie, Show, Episode, Season, CustomList, Comment, Person, PublicList, \
     WatchedProgress, CollectionProgress, HiddenShow, HiddenMovie, HiddenSeason, HiddenUser
 
 IDENTIFIERS = {
