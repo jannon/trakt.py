@@ -1,6 +1,6 @@
 
 
-from trakt.core.helpers import from_iso8601_datetime, to_iso8601_datetime,\
+from trakt.core.helpers import from_iso8601_datetime, to_iso8601_datetime, \
     from_iso8601_date, to_iso8601_date, deprecated
 from trakt.objects.core.helpers import update_attributes
 from trakt.objects.video import Video
